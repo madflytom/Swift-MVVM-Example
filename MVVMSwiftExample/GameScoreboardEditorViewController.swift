@@ -72,6 +72,7 @@ class GameScoreboardEditorViewController: UIViewController {
         
         viewModel.isFinished.bindAndFire { [unowned self] in
             if $0 {
+                self.pauseButton.isHidden = true
                 self.homePlayer1View.isHidden = true
                 self.homePlayer2View.isHidden = true
                 self.homePlayer3View.isHidden = true

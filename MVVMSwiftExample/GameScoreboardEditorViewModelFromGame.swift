@@ -30,6 +30,7 @@ class GameScoreboardEditorViewModelFromGame: NSObject, GameScoreboardEditorViewM
     let isFinished: Dynamic<Bool>
         
     let isPaused: Dynamic<Bool>
+    let isStopped: Dynamic<Bool>
     
     func togglePause() {
         if isPaused.value {
@@ -59,6 +60,7 @@ class GameScoreboardEditorViewModelFromGame: NSObject, GameScoreboardEditorViewM
         self.score = Dynamic(GameScoreboardEditorViewModelFromGame.scorePretty(for: game))
         self.isFinished = Dynamic(game.isFinished)
         self.isPaused = Dynamic(true)
+        self.isStopped = Dynamic(false)
         
         super.init()
         subscribeToNotifications()
@@ -96,6 +98,8 @@ class GameScoreboardEditorViewModelFromGame: NSObject, GameScoreboardEditorViewM
         
         if game.isFinished {
             self.isFinished.value = true
+            // stop timer and set property so view can hide the pause/stop button
+            pauseTimer()
         }
     }
     
