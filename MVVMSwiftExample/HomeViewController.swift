@@ -36,10 +36,13 @@ class HomeViewController: UIViewController {
         if gameLibrary.allGames().first != nil {
             
             let controller = UIStoryboard.loadGameScoreboardEditorViewController()
+            guard let game = gameLibrary.allGames().first else {
+                return
+            }
             
             // uncomment this when view model is implemented
-//            let viewModel = GameScoreboardEditorViewModelFromGame(withGame: game)
-//            controller.viewModel = viewModel
+            let viewModel = GameScoreboardEditorViewModelFromGame(withGame: game )
+            controller.viewModel = viewModel
             
             self.insertChildController(controller, intoParentView: self.view)
         }
