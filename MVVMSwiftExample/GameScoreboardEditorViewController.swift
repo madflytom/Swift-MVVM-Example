@@ -86,6 +86,25 @@ class GameScoreboardEditorViewController: UIViewController {
         viewModel.isPaused.bindAndFire { [unowned self] in
             let title = $0 ? "Start" : "Pause"
             self.pauseButton.setTitle(title, for: .normal)
+            
+            //TODO: this is ugly - make a toggle method for this?
+            if(viewModel.isPaused.value == true){
+                self.homePlayer1View.isUserInteractionEnabled = false
+                self.homePlayer2View.isUserInteractionEnabled = false
+                self.homePlayer3View.isUserInteractionEnabled = false
+                
+                self.awayPlayer1View.isUserInteractionEnabled = false
+                self.awayPlayer2View.isUserInteractionEnabled = false
+                self.awayPlayer3View.isUserInteractionEnabled = false
+            } else {
+                self.homePlayer1View.isUserInteractionEnabled = true
+                self.homePlayer2View.isUserInteractionEnabled = true
+                self.homePlayer3View.isUserInteractionEnabled = true
+                
+                self.awayPlayer1View.isUserInteractionEnabled = true
+                self.awayPlayer2View.isUserInteractionEnabled = true
+                self.awayPlayer3View.isUserInteractionEnabled = true
+            }
         }
         
         homePlayer1View.viewModel = viewModel.homePlayers[0]
